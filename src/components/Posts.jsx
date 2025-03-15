@@ -4,6 +4,7 @@ import Form from "./Form";
 
 const Posts = () => {
   const [post, setPost] = useState([]);
+  const [updateDataApi, setUpdateDataApi] = useState({});
 
   const getPosts = async () => {
     const post = await getPost();
@@ -25,13 +26,22 @@ const Posts = () => {
       console.error("Error deleting post:", error);
     }
   };
+
+  // function to update a post
+  const handleUpdatePost = (curElem) => setUpdateDataApi(curElem);
+
   useEffect(() => {
     getPosts();
   }, []);
   return (
     <>
       <section className="section-form">
-        <Form post={post} setPost={setPost} />
+        <Form
+          post={post}
+          setPost={setPost}
+          updateDataApi={updateDataApi}
+          setUpdateDataApi={setUpdateDataApi}
+        />
       </section>
       <section className="section-post">
         <ol>
@@ -41,7 +51,7 @@ const Posts = () => {
               <li key={id}>
                 <p>{title}</p>
                 <p>{body}</p>
-                <button>Edit</button>
+                <button onClick={() => handleUpdatePost(curEle)}>Edit</button>
                 <button className="btn-delete" onClick={() => handleDelete(id)}>
                   Delete
                 </button>
