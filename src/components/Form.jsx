@@ -30,6 +30,7 @@ const Form = ({ post, setPost }) => {
     }
   };
 
+  // form submit method
   const handleFormSubmit = (e) => {
     e.preventDefault();
     addPostData();
